@@ -62,6 +62,7 @@ const srcDir = path.join(rootDir, "src");
 
 await fs.rm(distDir, { recursive: true, force: true });
 await fs.mkdir(distDir, { recursive: true });
+await fs.cp(path.join(rootDir, "public"), distDir, { recursive: true, force: true });
 
 await copyHtml(path.join(rootDir, "index.html"), path.join(distDir, "index.html"));
 await fs.copyFile(
@@ -141,6 +142,10 @@ async function bundleMain(entryPoint, outputFile) {
     platform: "browser",
     outfile: outputFile,
     loader: { ".png": "file" },
+    define: {
+      "import.meta.env.VITE_API_URL": JSON.stringify(process.env.VITE_API_URL ?? ""),
+      "import.meta.env.VITE_API_BASE_URL": JSON.stringify(process.env.VITE_API_BASE_URL ?? ""),
+    },
     jsx: "automatic",
     logLevel: "silent",
   });
