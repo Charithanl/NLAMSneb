@@ -14,6 +14,7 @@ services:
       - ./NLAMS_Dataset_A_FINAL_WITH_SYNTHETIC_DEMO/postgis/schema.sql:/docker-entrypoint-initdb.d/001_schema.sql:ro
       - ./backend/migrations/001_operational_schema.sql:/docker-entrypoint-initdb.d/002_operational_schema.sql:ro
       - ./backend/migrations/002_auth_schema.sql:/docker-entrypoint-initdb.d/003_auth_schema.sql:ro
+      - ./backend/migrations/003_domain_records.sql:/docker-entrypoint-initdb.d/004_domain_records.sql:ro
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
       interval: 10s

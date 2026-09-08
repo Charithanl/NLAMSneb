@@ -65,13 +65,13 @@ await fs.mkdir(distDir, { recursive: true });
 
 await copyHtml(path.join(rootDir, "index.html"), path.join(distDir, "index.html"));
 await fs.copyFile(
-  path.join(rootDir, "../NLAMS_Dataset_A_FINAL_WITH_SYNTHETIC_DEMO/processed/synthetic_acquisition_demo.csv"),
+  path.join(rootDir, "public/data/synthetic_acquisition_demo.csv"),
   path.join(distDir, "data", "synthetic_acquisition_demo.csv"),
 ).catch(async (error) => {
   if (error.code !== "ENOENT") throw error;
   await fs.mkdir(path.join(distDir, "data"), { recursive: true });
   await fs.copyFile(
-    path.join(rootDir, "../NLAMS_Dataset_A_FINAL_WITH_SYNTHETIC_DEMO/processed/synthetic_acquisition_demo.csv"),
+    path.join(rootDir, "public/data/synthetic_acquisition_demo.csv"),
     path.join(distDir, "data", "synthetic_acquisition_demo.csv"),
   );
 });

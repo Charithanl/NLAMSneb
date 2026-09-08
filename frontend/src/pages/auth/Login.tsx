@@ -19,8 +19,8 @@ export function Login() {
 
   const from = (location.state as { from?: string } | null)?.from ?? "/dashboard";
 
-  const handleLogin = (role: Role) => {
-    loginAs(role);
+  const handleLogin = async (role: Role) => {
+    await loginAs(role);
     navigate(from, { replace: true, state: { showWelcome: true } });
   };
 
@@ -58,7 +58,7 @@ export function Login() {
                 <button
                   key={user.id}
                   type="button"
-                  onClick={() => handleLogin(user.role)}
+                  onClick={() => void handleLogin(user.role)}
                   className="group flex items-center justify-between rounded-2xl border border-slate-200 bg-slate-50 px-4 py-4 text-left transition hover:border-gov-300 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gov-500 focus-visible:ring-offset-2"
                 >
                   <div>

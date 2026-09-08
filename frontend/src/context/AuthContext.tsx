@@ -6,7 +6,7 @@ import { useAuthStore } from "../store/auth.store";
 interface AuthContextValue {
   user: User | null;
   isAuthenticated: boolean;
-  loginAs: (role: Role) => User;
+  loginAs: (role: Role) => Promise<User>;
   logout: () => void;
   demoUsers: User[];
   hasSeenSessionHeadsUp: boolean;
@@ -28,8 +28,13 @@ export function AuthProvider({ children }: PropsWithChildren) {
     () => ({
       user,
       isAuthenticated: user !== null,
-      loginAs: (role: Role) => {
-        const nextUser = authService.signIn(role);
+      loginAs: async (role: Role) => {
+        let nextUser: User;
+        try {
+          nextUser = await authService.signInWithBackend(role);
+        } catch {
+          nextUser = authService.signIn(role);
+        }
         setHasSeenSessionHeadsUp(false);
         setUser(nextUser);
         return nextUser;

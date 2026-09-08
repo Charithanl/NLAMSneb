@@ -7,7 +7,7 @@ import fs from "node:fs";
 const rootDir = fileURLToPath(new URL(".", import.meta.url));
 const datasetPath = path.resolve(
   rootDir,
-  "../NLAMS_Dataset_A_FINAL_WITH_SYNTHETIC_DEMO/processed/synthetic_acquisition_demo.csv",
+  "public/data/synthetic_acquisition_demo.csv",
 );
 
 function acquisitionDatasetPlugin() {

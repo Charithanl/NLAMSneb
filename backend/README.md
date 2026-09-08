@@ -29,6 +29,13 @@ Endpoints:
 - `POST /api/v1/projects`
 - `PATCH /api/v1/projects/:id`
 - `DELETE /api/v1/projects/:id`
+- `GET|POST|PATCH|DELETE /api/v1/acquisition/cases`
+- `GET|POST|PATCH|DELETE /api/v1/compensation/cases`
+- `GET|POST|PATCH|DELETE /api/v1/compensation/payments`
+- `GET|POST|PATCH|DELETE /api/v1/documents`
+- `GET|POST|PATCH|DELETE /api/v1/rehabilitation/families`
+- `GET|POST|PATCH|DELETE /api/v1/reports`
+- `GET /api/v1/reports/metrics`
 
 The operational migrations are in `migrations/` and are mounted by Docker after the official GIS schema. Change `JWT_SECRET` before any non-local deployment.
 

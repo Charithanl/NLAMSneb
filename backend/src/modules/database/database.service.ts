@@ -7,7 +7,11 @@ export class DatabaseService implements OnModuleDestroy {
   private readonly pool: Pool;
 
   constructor(config: ConfigService) {
+    const connectionString = config.get<string>("DATABASE_URL");
     this.pool = new Pool({
+      ...(connectionString
+        ? { connectionString, ssl: config.get<string>("DB_SSL", "false") === "true" ? { rejectUnauthorized: false } : undefined }
+        : {}),
       host: config.get<string>("DB_HOST", "localhost"),
       port: config.get<number>("DB_PORT", 5432),
       database: config.get<string>("DB_NAME", "nlams"),

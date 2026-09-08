@@ -7,6 +7,11 @@ import { DatabaseModule } from "./modules/database/database.module";
 import { GisModule } from "./modules/gis/gis.module";
 import { HealthModule } from "./modules/health/health.module";
 import { ProjectsModule } from "./modules/projects/projects.module";
+import { AcquisitionModule } from "./modules/acquisition/acquisition.module";
+import { CompensationModule } from "./modules/compensation/compensation.module";
+import { DocumentsModule } from "./modules/documents/documents.module";
+import { RehabilitationModule } from "./modules/rehabilitation/rehabilitation.module";
+import { ReportsModule } from "./modules/reports/reports.module";
 
 @Module({
   imports: [
@@ -18,6 +23,11 @@ import { ProjectsModule } from "./modules/projects/projects.module";
     AuthModule,
     GisModule,
     ProjectsModule,
+    AcquisitionModule,
+    CompensationModule,
+    DocumentsModule,
+    RehabilitationModule,
+    ReportsModule,
   ],
 })
 export class AppModule {}

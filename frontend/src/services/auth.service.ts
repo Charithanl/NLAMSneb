@@ -1,6 +1,8 @@
 import type { User } from "../types/domain";
+import { getApiBaseUrl } from "../utils/env";
 
 const STORAGE_KEY = "nlams.currentUser";
+const TOKEN_KEY = "nlams.accessToken";
 
 const DEMO_USERS: User[] = [
   {
@@ -67,13 +69,34 @@ export const authService = {
     return user;
   },
 
+  async signInWithBackend(role: User["role"]): Promise<User> {
+    const email = role === "central_admin" ? "admin@nlams.local" : `${role}@nlams.local`;
+    const response = await fetch(`${getApiBaseUrl()}/auth/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password: "nlams-demo" }),
+    });
+    if (!response.ok) throw new Error("Backend login is unavailable.");
+    const payload = await response.json() as { accessToken: string; user: { id: string; fullName: string; role: User["role"] } };
+    const fallback = DEMO_USERS.find((candidate) => candidate.role === payload.user.role) ?? DEMO_USERS[0];
+    const user: User = { ...fallback, id: payload.user.id, name: payload.user.fullName, role: payload.user.role };
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(user));
+    window.localStorage.setItem(TOKEN_KEY, payload.accessToken);
+    return user;
+  },
+
   signOut(): void {
     if (typeof window !== "undefined") {
       window.localStorage.removeItem(STORAGE_KEY);
+      window.localStorage.removeItem(TOKEN_KEY);
     }
   },
 
   getDemoUsers(): User[] {
     return DEMO_USERS;
+  },
+
+  getAccessToken() {
+    return typeof window === "undefined" ? null : window.localStorage.getItem(TOKEN_KEY);
   },
 };
