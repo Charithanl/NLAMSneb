@@ -1,0 +1,51 @@
+{
+  "disclaimer": "Dataset B is synthetic data created for model development and demonstration. Model performance on this dataset does not represent validated performance on historical government land-acquisition data.",
+  "selection_criterion": "Highest three-fold cross-validated PR-AUC; recall and F1 for delayed projects are reported as safety checks.",
+  "selected_model": "Tuned XGBoost",
+  "decision_threshold": 0.0593,
+  "cross_validation": [
+    {
+      "model": "Dummy baseline",
+      "accuracy": 0.9964,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "roc_auc": 0.4998,
+      "pr_auc": 0.0036,
+      "brier_score": 0.0036
+    },
+    {
+      "model": "Tuned XGBoost",
+      "accuracy": 0.9809,
+      "precision": 0.1389,
+      "recall": 0.8333,
+      "f1": 0.2381,
+      "roc_auc": 0.9683,
+      "pr_auc": 0.1189,
+      "brier_score": 0.0063
+    }
+  ],
+  "held_out_test_metrics": {
+    "accuracy": 0.977,
+    "precision": 0.0556,
+    "recall": 0.3333,
+    "f1": 0.0952,
+    "roc_auc": 0.706,
+    "pr_auc": 0.0605,
+    "brier_score": 0.0069
+  },
+  "confusion_matrix": [
+    [
+      805,
+      17
+    ],
+    [
+      2,
+      1
+    ]
+  ],
+  "calibration": {
+    "brier_score": 0.0069,
+    "status": "Not calibrated: the synthetic dataset contains only nine delayed records, which is insufficient for reliable probability calibration."
+  }
+}

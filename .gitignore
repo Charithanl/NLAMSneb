@@ -1,0 +1,16 @@
+node_modules
+dist
+frontend/node_modules
+frontend/dist
+frontend/.vite
+frontend/*.tsbuildinfo
+.vite
+.env
+.env.local
+.DS_Store
+coverage
+*.log
+__pycache__/
+*.py[cod]
+*.tsbuildinfo
+NLAMS_Dataset_A_FINAL_WITH_SYNTHETIC_DEMO/

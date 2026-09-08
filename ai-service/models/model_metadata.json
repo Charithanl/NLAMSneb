@@ -1,0 +1,98 @@
+{
+  "model_name": "NLAMS acquisition delay-risk model",
+  "model_version": "NLAMS-DELAY-RISK-XGB-v1.0",
+  "model_type": "XGBoost binary classifier",
+  "training_date_utc": "2026-09-08T17:36:49.188521+00:00",
+  "training_dataset": "C:\\Users\\charitha nl\\OneDrive\\Desktop\\nlams\\nlams\\NLAMS_Dataset_A_FINAL_WITH_SYNTHETIC_DEMO\\processed\\synthetic_acquisition_demo.csv",
+  "training_dataset_version": "SYNTHETIC_DEMO",
+  "training_rows": 1675,
+  "held_out_test_rows": 825,
+  "features": [
+    "land_required_hectares",
+    "parcel_count",
+    "land_owner_count",
+    "affected_families",
+    "displaced_families",
+    "objections_count",
+    "hearings_count",
+    "court_case_count",
+    "compensation_assessed_inr",
+    "compensation_disbursed_inr",
+    "compensation_pending_inr",
+    "rr_assessed_inr",
+    "rr_disbursed_inr",
+    "land_record_digitization_rate",
+    "estimated_duration_days",
+    "state_ut",
+    "district",
+    "project_type",
+    "applicable_act",
+    "current_stage"
+  ],
+  "excluded_for_leakage": {
+    "delay_risk_score": "Pre-existing delay-risk field; excluded to avoid target leakage.",
+    "record_id": "Record identifier; excluded.",
+    "project_id": "Project identifier; excluded because each project has one record."
+  },
+  "best_parameters": {
+    "model__subsample": 0.85,
+    "model__reg_lambda": 1.0,
+    "model__n_estimators": 240,
+    "model__min_child_weight": 4,
+    "model__max_depth": 4,
+    "model__learning_rate": 0.03,
+    "model__colsample_bytree": 1.0
+  },
+  "evaluation": {
+    "disclaimer": "Dataset B is synthetic data created for model development and demonstration. Model performance on this dataset does not represent validated performance on historical government land-acquisition data.",
+    "selection_criterion": "Highest three-fold cross-validated PR-AUC; recall and F1 for delayed projects are reported as safety checks.",
+    "selected_model": "Tuned XGBoost",
+    "decision_threshold": 0.0593,
+    "cross_validation": [
+      {
+        "model": "Dummy baseline",
+        "accuracy": 0.9964,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "roc_auc": 0.4998,
+        "pr_auc": 0.0036,
+        "brier_score": 0.0036
+      },
+      {
+        "model": "Tuned XGBoost",
+        "accuracy": 0.9809,
+        "precision": 0.1389,
+        "recall": 0.8333,
+        "f1": 0.2381,
+        "roc_auc": 0.9683,
+        "pr_auc": 0.1189,
+        "brier_score": 0.0063
+      }
+    ],
+    "held_out_test_metrics": {
+      "accuracy": 0.977,
+      "precision": 0.0556,
+      "recall": 0.3333,
+      "f1": 0.0952,
+      "roc_auc": 0.706,
+      "pr_auc": 0.0605,
+      "brier_score": 0.0069
+    },
+    "confusion_matrix": [
+      [
+        805,
+        17
+      ],
+      [
+        2,
+        1
+      ]
+    ],
+    "calibration": {
+      "brier_score": 0.0069,
+      "status": "Not calibrated: the synthetic dataset contains only nine delayed records, which is insufficient for reliable probability calibration."
+    }
+  },
+  "disclaimer": "Dataset B is synthetic data created for model development and demonstration. Model performance on this dataset does not represent validated performance on historical government land-acquisition data."
+}

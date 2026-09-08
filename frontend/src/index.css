@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  --nlams-primary: 27 82 181;
+  --nlams-primary-hover: 17 63 142;
+  --nlams-primary-muted: 238 245 255;
+  --nlams-surface: 255 255 255;
+  --nlams-surface-subtle: 245 247 251;
+  --nlams-surface-elevated: 255 255 255;
+  --nlams-border: 226 232 240;
+  --nlams-border-strong: 191 203 220;
+  --nlams-text-primary: 15 29 47;
+  --nlams-text-secondary: 71 85 105;
+  --nlams-text-muted: 100 116 139;
+  --nlams-success: 21 128 61;
+  --nlams-warning: 180 83 9;
+  --nlams-danger: 185 28 28;
+  --nlams-info: 37 99 235;
+  --nlams-risk-low: 21 128 61;
+  --nlams-risk-medium: 180 83 9;
+  --nlams-risk-high: 194 65 12;
+  --nlams-risk-critical: 185 28 28;
+  --nlams-radius-panel: 1rem;
+  --nlams-radius-control: 0.75rem;
+  --nlams-shadow-soft: 0 1px 1px rgba(15, 29, 47, 0.03), 0 10px 30px rgba(15, 29, 47, 0.06);
+  --nlams-shadow-panel: 0 1px 1px rgba(15, 29, 47, 0.03), 0 18px 50px rgba(15, 29, 47, 0.08);
+}
+
+html {
+  font-family:
+    "IBM Plex Sans", "Inter", "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans",
+    "Liberation Sans", sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.95), transparent 34%),
+    radial-gradient(circle at top right, rgba(224, 236, 255, 0.8), transparent 28%),
+    linear-gradient(180deg, rgb(248 250 253) 0%, rgb(236 242 249) 100%);
+  background-attachment: fixed;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.9), transparent 34%),
+    radial-gradient(circle at top right, rgba(224, 236, 255, 0.75), transparent 28%),
+    linear-gradient(180deg, rgb(248 250 253) 0%, rgb(236 242 249) 100%);
+  background-attachment: fixed;
+  color: rgb(var(--nlams-text-primary));
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+:focus-visible {
+  outline: 2px solid rgb(var(--nlams-primary));
+  outline-offset: 2px;
+}
+
+@layer components {
+  .nlams-surface {
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgb(var(--nlams-border));
+    border-radius: 1.25rem;
+    box-shadow: var(--nlams-shadow-soft);
+    backdrop-filter: blur(16px);
+  }
+
+  .nlams-surface-elevated {
+    background: rgba(255, 255, 255, 0.96);
+    border: 1px solid rgb(var(--nlams-border));
+    border-radius: 1.5rem;
+    box-shadow: var(--nlams-shadow-panel);
+    backdrop-filter: blur(20px);
+  }
+
+  .nlams-control {
+    border-radius: var(--nlams-radius-control);
+    border: 1px solid rgb(var(--nlams-border));
+    background: rgba(255, 255, 255, 0.92);
+    color: rgb(var(--nlams-text-primary));
+    box-shadow: 0 1px 1px rgba(15, 29, 47, 0.03);
+  }
+
+  .nlams-muted-panel {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(245, 247, 251, 0.96));
+    border: 1px solid rgb(var(--nlams-border));
+    border-radius: 1.25rem;
+  }
+}
